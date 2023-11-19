@@ -81,6 +81,8 @@ if ($city) {
                 <?php endforeach; ?>
             </tbody>
         </table>
+    <?php else: ?>
+        <p>No information found for <?= $country ?></p>
     <?php endif; ?>
 <?php endif; ?>
 

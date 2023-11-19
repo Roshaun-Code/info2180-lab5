@@ -8,30 +8,40 @@ document.addEventListener("DOMContentLoaded", () => {
     let url = `http://localhost/info2180-lab5/world.php`
     
     countryB.addEventListener("click", () => {
-        result.textContent = "";
-        fetch(url + `?country=${input.value}`)
-        .then(Response => Response.text())
-        .then(data => {
-            result.innerHTML += `${data}`;
-            countryTable.style.display = "table";
-            cityTable.style.display = "none";
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        })
+        if (input.value === ""){
+            result.textContent = "Please enter valid country";
+        } else {
+            result.textContent = "";
+            fetch(url + `?country=${input.value}`)
+            .then(Response => Response.text())
+            .then(data => {
+                result.innerHTML += `${data}`;
+                countryTable.style.display = "table";
+                cityTable.style.display = "none";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            })
+        }
+        
     })
 
     citiesB.addEventListener("click", () => {
-        result.textContent = "";
-        fetch(url + `&lookup=cities`)
-        .then(Response => Response.text())
-        .then(data => {
-            result.innerHTML = `${data}`;
-            countryTable.style.display = "none";
-            cityTable.style.display = "table";
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        })
+        if (input.value === ""){
+            result.textContent = "Please enter valid country";
+        } else {
+            result.textContent = "";
+            fetch(url + `?country=${input.value}&lookup=cities`)
+            .then(Response => Response.text())
+            .then(data => {
+                result.innerHTML = `${data}`;
+                countryTable.style.display = "none";
+                cityTable.style.display = "table";
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            })
+        }
+        
     })
 })
