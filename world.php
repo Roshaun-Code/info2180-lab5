@@ -13,23 +13,24 @@ $result = array();
 // GET
 $country = isset($_GET['country']) ? htmlspecialchars($_GET['country']) : '';
 $city = isset($_GET['lookup']) && htmlspecialchars($_GET['lookup']) == 'cities';
+$partialName = '%' . $country . '%';
 
 if ($city) {
     $sql = "SELECT cities.name AS city_name, cities.district, cities.population
             FROM cities
             INNER JOIN countries ON cities.id = countries.capital
-            WHERE countries.name LIKE :country";
+            WHERE countries.name LIKE :partialName";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':country', $country, PDO::PARAM_STR);
+    $stmt->bindParam(':partialName', $partialName, PDO::PARAM_STR);
     $stmt->execute();
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
-    $sql = "SELECT * FROM countries WHERE name LIKE :country";
+    $sql = "SELECT * FROM countries WHERE name LIKE :partialName";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':country', $country, PDO::PARAM_STR);
+    $stmt->bindParam(':partialName', $partialName, PDO::PARAM_STR);
     $stmt->execute();
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -62,8 +63,7 @@ if ($city) {
 <!-- countries -->
 <?php if ($results && !$city): ?>
     <?php if ($results): ?>
-        <h2>Search Results for <?= $country ?>:</h2>
-        <table id="countryTable">
+        <table>
             <thead>
                 <th>Country</th>
                 <th>Continent</th>
@@ -88,8 +88,7 @@ if ($city) {
 
 <!-- cities -->
 <?php if ($city): ?>
-    <h2>Search Results for <?= $country ?>:</h2>
-    <table id="cityTable">
+    <table>
         <thead>
             <th>Name</th>
             <th>District</th>

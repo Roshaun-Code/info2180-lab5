@@ -1,1 +1,105 @@
 /* Add your own styles */
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+}
+
+header{
+    background-color: #363062;
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+header h1{
+    font-size: 36px;
+}
+
+main{
+    min-height: 250px;
+    display: grid;
+    grid-template-rows: 150px 1fr;
+}
+
+#controls{
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    grid-template-rows: 75px 50px;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    grid-template-areas: 
+    "header header"
+    "button1 button2"
+}
+
+input{
+    grid-area: header;
+    font-weight: bold;
+    border-radius: 5px;
+    border-style: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    height: 50%;
+    padding: 10px;
+}
+
+button{
+    height: 75%;
+    border-radius: 5px;
+    border-style: none;
+    background-color: #818FB4;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+#lookup{
+    grid-area: button1;
+}
+
+#cities{
+    grid-area: button2;
+}
+
+#result{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+}
+
+table thead tr{
+    background-color: #363062;
+    color: white;
+    text-align: left;
+}
+
+table th, table td{
+    padding: 12px 15px;
+}
+
+table tbody tr{
+    border-bottom: 1px solid lightgray;
+}
+
+table tbody tr:nth-of-type(even){
+    background-color: #818FB4;
+}
+
+table tbody tr:last-of-type{
+    border-bottom: 2px solid #363062;
+}
